@@ -27,12 +27,12 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        python lab3\libraryproject\manage.py test
+        python lab3/libraryproject/manage.py test
         sleep 10
-        python lab2\libraryproject\manage.py test
+        python lab2/libraryproject/manage.py test
     - name: Start Django Development Server
       run: |
-        nohup python lab3\libraryproject\manage.py runserver 0.0.0.0:8000 &
+        nohup python lab3/libraryproject/manage.py runserver 0.0.0.0:8000 &
         sleep 10  # give server time to start
         if curl -s http://127.0.0.1:8000 > /dev/null; then
           echo "Django development server is running at http://127.0.0.1:8000"
