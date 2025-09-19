@@ -1,6 +1,8 @@
 from django.shortcuts import render
 
-from django.http import HttpResponse
-
 def index(request):
-    return HttpResponse("Hello, world. You're at the bookmodule index.")
+    name = request.GET.get("name") or "world!"
+    return render(request, "bookmodule/index.html", {"name": name})
+
+# def index2(request, val1 = 0):
+#     return render(request, "bookmodule/index2.html", {"val1": val1})
