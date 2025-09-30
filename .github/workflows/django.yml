@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: |
           # Assuming all labs share same requirements
-          pip install -r lab1/libraryproject/requirements.txt
+          pip install -r requirements.txt
 
       - name: Run tests for all labs
         run: |
