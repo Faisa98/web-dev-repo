@@ -92,3 +92,13 @@
     color: #159328;
     background-color: rgba(201, 196, 56, 0.263);
 }
+
+/* listing page */
+#listing-header {
+    text-align: left;
+    font-family: sans-serif;
+    font-weight: bold;
+    padding: 8px;
+    color: #ffffff;
+    background-color: rgb(56, 201, 186);
+}
