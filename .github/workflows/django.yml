@@ -1,42 +1,49 @@
-name: Django CI
+name: Django Tests for All Labs
 
-on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+on: [push, pull_request]
 
 jobs:
-  build:
-
+  test-django:
     runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 4
-      matrix:
-        python-version: [ 3.8, 3.9, '3.10']
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Run Tests
-      run: |
-        python lab3/libraryproject/manage.py test
-        sleep 10
-        python lab2/libraryproject/manage.py test
-    - name: Start Django Development Server
-      run: |
-        nohup python lab3/libraryproject/manage.py runserver 0.0.0.0:8000 &
-        sleep 10  # give server time to start
-        if curl -s http://127.0.0.1:8000/books/456 > /dev/null; then
-          echo "Django development server is running at http://127.0.0.1:8000"
-        else
-          echo "Django development server failed to start"
-          exit 1
-        fi
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          # Assuming all labs share same requirements
+          pip install -r lab1/libraryproject/requirements.txt
+
+      - name: Run tests for all labs
+        run: |
+          # List of labs and one page per lab
+          declare -A LAB_PAGES=(
+            ["lab2"]="/"
+            ["lab3"]="/books/456"
+            ["lab4"]="/books/aboutus"
+          )
+
+          for lab in "${!LAB_PAGES[@]}"; do
+            echo "▶️ Starting $lab server..."
+            nohup python $lab/libraryproject/manage.py runserver 0.0.0.0:8000 &
+            sleep 10
+
+            page=${LAB_PAGES[$lab]}
+            echo "Testing $lab at http://127.0.0.1:8000${page}"
+
+            if curl -s "http://127.0.0.1:8000${page}" > /dev/null; then
+              echo "✅ $lab page ${page} works"
+            else
+              echo "❌ $lab page ${page} failed"
+              exit 1
+            fi
+
+            # Kill the server before starting the next lab
+            pkill -f "runserver"
+            sleep 3
+          done
