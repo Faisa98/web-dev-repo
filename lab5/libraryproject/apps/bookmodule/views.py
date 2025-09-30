@@ -28,3 +28,9 @@ def aboutus(request):
 
 def links(request):
     return render(request, 'bookmodule/links.html')
+def text(request):
+    return render(request, 'bookmodule/text.html')
+def listing(request):
+    return render(request, 'bookmodule/listing.html')
+def tables(request):
+    return render(request, 'bookmodule/tables.html')

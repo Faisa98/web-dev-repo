@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import include, path
 from . import views
 
 urlpatterns = [
@@ -11,5 +11,7 @@ urlpatterns = [
     path('<int:bookId>/', views.viewbook, name="books.view_one_book"),
     path('aboutus/', views.aboutus, name="books.aboutus"),
 
-    path('html5/links', views.links, name="books.links"),
+    path('html5/', include('apps.bookmodule.html5_urls')),
+
+    
 ]

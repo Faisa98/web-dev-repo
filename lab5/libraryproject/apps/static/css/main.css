@@ -1,3 +1,4 @@
+/* links page */
 #link-one {
     background-color: rgb(163, 228, 163);
     color: #ae3535;
@@ -80,4 +81,14 @@
     background-color: #7a7a7a;
     color: #ffffff;
     transform: translateY(1px);
+}
+
+/* text/formatting page */
+#text-header {
+    text-align: left;
+    font-family: sans-serif;
+    font-weight: bold;
+    padding: 8px;
+    color: #159328;
+    background-color: rgba(201, 196, 56, 0.263);
 }
