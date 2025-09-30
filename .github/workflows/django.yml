@@ -25,7 +25,8 @@ jobs:
           declare -A LAB_PAGES=(
             ["lab2"]="/"
             ["lab3"]="/books/456"
-            ["lab4"]="/books/aboutus"
+            ["lab4"]="/books/aboutus/"
+            ["lab5"]="/books/html5/links"
           )
 
           for lab in "${!LAB_PAGES[@]}"; do

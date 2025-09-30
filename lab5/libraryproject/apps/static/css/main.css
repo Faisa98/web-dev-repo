@@ -1,0 +1,83 @@
+#link-one {
+    background-color: rgb(163, 228, 163);
+    color: #ae3535;
+    padding: 20px;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+#link-two {
+    background-color: #545454;
+    color: #f4c024;
+    padding: 20px;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+#link-three {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+#link-one:hover {
+    background-color: #ae3535;
+    color: lightgreen;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+#link-two:hover {
+    background-color: #f4c024;
+    color: #545454;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+#link-three:hover {
+    background-color: #ffffff;
+    color: #000000;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+#link-one:visited {
+    color: #5c0101;
+}
+
+#link-two:visited {
+    color: #a17f19;
+}
+
+#link-three:visited {
+    color: #7a7a7a;
+}
+
+#link-one:active {
+    background-color: #5c0101;
+    color: lightgreen;
+    transform: translateY(1px);
+}
+
+#link-two:active {
+    background-color: #b08914;
+    color: #3f3f3f;
+    transform: translateY(1px);
+}
+
+#link-three:active {
+    background-color: #7a7a7a;
+    color: #ffffff;
+    transform: translateY(1px);
+}
