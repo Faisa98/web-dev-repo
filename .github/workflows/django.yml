@@ -27,6 +27,7 @@ jobs:
             ["lab3"]="/books/456"
             ["lab4"]="/books/aboutus/"
             ["lab5"]="/books/html5/links"
+            ["lab6"]="/books/search/"
           )
 
           for lab in "${!LAB_PAGES[@]}"; do

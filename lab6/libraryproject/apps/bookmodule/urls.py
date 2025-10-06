@@ -12,6 +12,9 @@ urlpatterns = [
     path('aboutus/', views.aboutus, name="books.aboutus"),
 
     path('html5/', include('apps.bookmodule.html5_urls')),
+    
+    #lab6
+    path('search/', views.search, name="books.search"),
 
     
 ]
