@@ -1,0 +1,15 @@
+{% extends "layouts/base.html" %} 
+{% load static %} 
+{% block title %} book list {% endblock title %} 
+{% block content %}
+    <h1>Book List</h1>
+    <ul>
+        {% for obj in books %}
+        <li>ID: {{obj.id}}, Title: {{obj.title}}</li>
+        {% empty %}
+        <li>No books available.</li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock content %}

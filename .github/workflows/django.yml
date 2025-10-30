@@ -28,17 +28,18 @@ jobs:
             ["lab4"]="/books/aboutus/"
             ["lab5"]="/books/html5/links"
             ["lab6"]="/books/search/"
+            ["lab7"]="/books/simple/query/"
           )
 
           for lab in "${!LAB_PAGES[@]}"; do
             echo "▶️ Starting $lab server..."
-            nohup python $lab/libraryproject/manage.py runserver 0.0.0.0:8000 &
+            nohup python $lab/libraryproject/manage.py runserver 0.0.0.0:8000 > /dev/null &
             sleep 10
 
             page=${LAB_PAGES[$lab]}
             echo "Testing $lab at http://127.0.0.1:8000${page}"
 
-            if curl -s "http://127.0.0.1:8000${page}" > /dev/null; then
+            if curl -s "http://127.0.0.1:8000${page}" > /dev/null 2>&1; then
               echo "✅ $lab page ${page} works"
             else
               echo "❌ $lab page ${page} failed"
