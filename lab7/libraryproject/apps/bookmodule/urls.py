@@ -16,5 +16,6 @@ urlpatterns = [
     #lab6
     path('search/', views.search, name="books.search"),
 
-    
+    #lab7
+    path('simple/query/', views.simple_query, name="books.simple_query"),
 ]

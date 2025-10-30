@@ -28,6 +28,7 @@ jobs:
             ["lab4"]="/books/aboutus/"
             ["lab5"]="/books/html5/links"
             ["lab6"]="/books/search/"
+            ["lab7"]="/books/simple/query/"
           )
 
           for lab in "${!LAB_PAGES[@]}"; do
