@@ -39,7 +39,7 @@ jobs:
             page=${LAB_PAGES[$lab]}
             echo "Testing $lab at http://127.0.0.1:8000${page}"
 
-            if curl "http://127.0.0.1:8000${page}" > /dev/null; then
+            if curl -s "http://127.0.0.1:8000${page}" > /dev/null 2>&1; then
               echo "✅ $lab page ${page} works"
             else
               echo "❌ $lab page ${page} failed"
