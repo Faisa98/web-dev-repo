@@ -87,13 +87,19 @@ def task4(request):
     mybooks=Book.objects.filter(~Q(edition__lte=0)).order_by('title')
     return render(request, 'bookmodule/booklist.html', {'books':mybooks})
 
-# from django.db.models import Count, Min, Max, Sum, Avg
-# def task5(request):
-#     agg1= Sum('')
-#     agg2=
-#     agg3=
-#     agg4=
-#     agg5=
-#     mybooks=Book.objects.filter(Q())
-#     return render(request, 'bookmodule/booklist.html', {'books':mybooks})
+from django.db.models import Count, Min, Max, Sum, Avg
+def task5(request):
+    agg1= Count('price')
+    agg2= Sum('price', default=0)
+    agg3= Avg('price', default=0)
+    agg4= Max('price', default=0)
+    agg5= Min('price', default=0)
+    query=Book.objects.aggregate(co=agg1, to=agg2, av=agg3, ma=agg4, mi=agg5)
+    return render(request, 'bookmodule/agg.html', {'query':query})
+
+from django.db.models import Count
+from .models import Address
+def task7(request):
+    data= Address.objects.annotate(numStu=Count('student'))
+    return render(request, 'bookmodule/stuCity.html',{'data':data})
 

@@ -1,0 +1,19 @@
+{% extends "layouts/base.html" %} 
+{% load static %} 
+{% block title %} book list {% endblock title %} 
+{% block content %}
+    
+<table border="1">
+    <tr>
+        <th>City</th>
+        <th>number of students</th>
+    </tr>
+    {% for row in data %}
+    <tr>
+        <td>{{row.city}}</td>
+        <td>{{row.numStu}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock content %}
