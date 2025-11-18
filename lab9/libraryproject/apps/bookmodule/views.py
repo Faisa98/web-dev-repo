@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Book
+# from .models import Book
 
 # def index(request):
 #     name = request.GET.get("name") or "world!"
@@ -59,47 +59,47 @@ def __getBooksList():
     book3 = {'id':43211234, 'title':'The Hundred-Page Machine Learning Book', 'author':'Andriy Burkov'}
     return [book1, book2, book3]
 
-# lab7
-def simple_query(request):
-    mybooks=Book.objects.filter(title__icontains='and') # <- multiple objects
-    return render(request, 'bookmodule/booklist.html', {'books':mybooks})
+# # lab7
+# def simple_query(request):
+#     mybooks=Book.objects.filter(title__icontains='and') # <- multiple objects
+#     return render(request, 'bookmodule/booklist.html', {'books':mybooks})
 
-def complex_query(request):
-    mybooks=books=Book.objects.filter(author__isnull =False).filter(title__icontains='and').filter(edition__gte = 2).exclude(price__lte = 100)[:10]
-    if len(mybooks)>=1:
-        return render(request, 'bookmodule/booklist.html', {'books':mybooks})
-    else:
-        return render(request, 'bookmodule/index.html')
+# def complex_query(request):
+#     mybooks=books=Book.objects.filter(author__isnull =False).filter(title__icontains='and').filter(edition__gte = 2).exclude(price__lte = 100)[:10]
+#     if len(mybooks)>=1:
+#         return render(request, 'bookmodule/booklist.html', {'books':mybooks})
+#     else:
+#         return render(request, 'bookmodule/index.html')
     
-#lab8
-from django.db.models import Q
+# #lab8
+# from django.db.models import Q
 
-def task1(request):
-    mybooks=Book.objects.filter(Q(price__lte=80))
-    return render(request, 'bookmodule/booklist.html', {'books':mybooks})
-def task2(request):
-    mybooks=Book.objects.filter(Q(edition__gt=3) & (Q(title__contains = 'qu') | Q(author__contains = 'qu')))
-    return render(request, 'bookmodule/booklist.html', {'books':mybooks})
-def task3(request):
-    mybooks=Book.objects.filter(~Q(edition__gt=3) & (~Q(title__contains = 'qu') | ~Q(author__contains = 'qu')))
-    return render(request, 'bookmodule/booklist.html', {'books':mybooks})
-def task4(request):
-    mybooks=Book.objects.filter(~Q(edition__lte=0)).order_by('title')
-    return render(request, 'bookmodule/booklist.html', {'books':mybooks})
+# def task1(request):
+#     mybooks=Book.objects.filter(Q(price__lte=80))
+#     return render(request, 'bookmodule/booklist.html', {'books':mybooks})
+# def task2(request):
+#     mybooks=Book.objects.filter(Q(edition__gt=3) & (Q(title__contains = 'qu') | Q(author__contains = 'qu')))
+#     return render(request, 'bookmodule/booklist.html', {'books':mybooks})
+# def task3(request):
+#     mybooks=Book.objects.filter(~Q(edition__gt=3) & (~Q(title__contains = 'qu') | ~Q(author__contains = 'qu')))
+#     return render(request, 'bookmodule/booklist.html', {'books':mybooks})
+# def task4(request):
+#     mybooks=Book.objects.filter(~Q(edition__lte=0)).order_by('title')
+#     return render(request, 'bookmodule/booklist.html', {'books':mybooks})
 
-from django.db.models import Count, Min, Max, Sum, Avg
-def task5(request):
-    agg1= Count('price')
-    agg2= Sum('price', default=0)
-    agg3= Avg('price', default=0)
-    agg4= Max('price', default=0)
-    agg5= Min('price', default=0)
-    query=Book.objects.aggregate(co=agg1, to=agg2, av=agg3, ma=agg4, mi=agg5)
-    return render(request, 'bookmodule/agg.html', {'query':query})
+# from django.db.models import Count, Min, Max, Sum, Avg
+# def task5(request):
+#     agg1= Count('price')
+#     agg2= Sum('price', default=0)
+#     agg3= Avg('price', default=0)
+#     agg4= Max('price', default=0)
+#     agg5= Min('price', default=0)
+#     query=Book.objects.aggregate(co=agg1, to=agg2, av=agg3, ma=agg4, mi=agg5)
+#     return render(request, 'bookmodule/agg.html', {'query':query})
 
-from django.db.models import Count
-from .models import Address
-def task7(request):
-    data= Address.objects.annotate(numStu=Count('student'))
-    return render(request, 'bookmodule/stuCity.html',{'data':data})
+# from django.db.models import Count
+# from .models import Address
+# def task7(request):
+#     data= Address.objects.annotate(numStu=Count('student'))
+#     return render(request, 'bookmodule/stuCity.html',{'data':data})
 
