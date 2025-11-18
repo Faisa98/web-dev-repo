@@ -27,5 +27,13 @@ urlpatterns = [
     # path('lab8/task4/', views.task4, name="books.task4"),
     # path('lab8/task5/', views.task5, name="books.task5"),
     # path('lab8/task7/', views.task7, name="books.task7"),
+    
+    # lab9
+    path('lab9/task1/', views.l9t1, name="books.l9t1"),
+    path('lab9/task2/', views.l9t2, name="books.l9t2"),
+    path('lab9/task3/', views.l9t3, name="books.l9t3"),
+    path('lab9/task4/', views.l9t4, name="books.l9t4"),
+    path('lab9/task5/', views.l9t5, name="books.l9t5"),
+    path('lab9/task6/', views.l9t6, name="books.l9t6"),
 
 ]

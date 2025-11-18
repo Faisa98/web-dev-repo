@@ -103,3 +103,16 @@ def __getBooksList():
 #     data= Address.objects.annotate(numStu=Count('student'))
 #     return render(request, 'bookmodule/stuCity.html',{'data':data})
 
+# lab9
+def l9t1(request):
+    return render(request, 'bookmodule/lab9/task1.html')
+def l9t2(request):
+    return render(request, 'bookmodule/lab9/task2.html')
+def l9t3(request):
+    return render(request, 'bookmodule/lab9/task3.html')
+def l9t4(request):
+    return render(request, 'bookmodule/lab9/task4.html')
+def l9t5(request):
+    return render(request, 'bookmodule/lab9/task5.html')
+def l9t6(request):
+    return render(request, 'bookmodule/lab9/task6.html')
