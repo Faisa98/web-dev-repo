@@ -104,8 +104,8 @@ def __getBooksList():
 #     return render(request, 'bookmodule/stuCity.html',{'data':data})
 
 # lab9
-from django.db.models import Sum , F, FloatField, ExpressionWrapper, Value
-from .models import Book
+from django.db.models import Sum , F, FloatField, ExpressionWrapper, Value, Count
+from .models import Book, Publisher
 def l9t1(request):
 
     totalBooksDict = Book.objects.aggregate(Sum('quantity', default=0))
@@ -117,10 +117,11 @@ def l9t1(request):
         )
     )
     
-
     return render(request, 'bookmodule/task1.html', {'objs': objs, 'total': totalBooks})
 def l9t2(request):
-    return render(request, 'bookmodule/task2.html')
+    objs = Publisher.objects.annotate(book_count=Count('book'))
+    
+    return render(request, 'bookmodule/task2.html', {'objs': objs})
 def l9t3(request):
     return render(request, 'bookmodule/task3.html')
 def l9t4(request):
