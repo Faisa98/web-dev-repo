@@ -104,7 +104,7 @@ def __getBooksList():
 #     return render(request, 'bookmodule/stuCity.html',{'data':data})
 
 # lab9
-from django.db.models import Sum , F, FloatField, ExpressionWrapper, Value, Count
+from django.db.models import Sum , F, FloatField, ExpressionWrapper, Value, Count, Subquery, OuterRef, Min
 from .models import Book, Publisher
 def l9t1(request):
 
@@ -123,7 +123,21 @@ def l9t2(request):
     
     return render(request, 'bookmodule/task2.html', {'objs': objs})
 def l9t3(request):
-    return render(request, 'bookmodule/task3.html')
+    min_date_subquery = Book.objects.filter(
+        # Link the subquery's publisher field to the main query's publisher field
+        publisher=OuterRef('publisher') 
+    ).values('publisher').annotate(
+        # Calculate the minimum pubdate for this group
+        min_pubdate=Min('pubdate')
+    ).values('min_pubdate')[:1] # Select only the value of the minimum date
+
+    # 2. Filter the Main QuerySet
+    # Select all Book objects where the book's pubdate is equal to the result
+    # of the subquery (the minimum date for its publisher).
+    oldest_books_per_publisher = Book.objects.filter(
+        pubdate=Subquery(min_date_subquery)
+    ).select_related('publisher')
+    return render(request, 'bookmodule/task3.html', {'objs': oldest_books_per_publisher})
 def l9t4(request):
     return render(request, 'bookmodule/task4.html')
 def l9t5(request):
