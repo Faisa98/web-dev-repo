@@ -42,9 +42,6 @@ jobs:
 
             if curl -s "http://127.0.0.1:8000${page}" > /dev/null 2>&1; then
               echo "✅ $lab page ${page} works"
-            elif [ "$lab" = "lab7" ] || [ "$lab" = "lab8" ]; then
-              # Handle the skip condition specifically
-              echo "⚠️ $lab page ${page} skipped for incompatibility"
             else
               echo "❌ $lab page ${page} failed"
               exit 1
