@@ -104,7 +104,7 @@ def __getBooksList():
 #     return render(request, 'bookmodule/stuCity.html',{'data':data})
 
 # lab9
-from django.db.models import Sum , F, FloatField, ExpressionWrapper, Value, Count, Subquery, OuterRef, Min, Max, Avg
+from django.db.models import Sum , F, FloatField, ExpressionWrapper, Value, Count, Subquery, OuterRef, Min, Max, Avg, Q
 from .models import Book, Publisher
 def l9t1(request):
 
@@ -148,6 +148,12 @@ def l9t4(request):
     
     return render(request, 'bookmodule/task4.html', {'objs': objs})
 def l9t5(request):
-    return render(request, 'bookmodule/task5.html')
+    objs = Publisher.objects.filter(
+        book__rating__gte=4
+    ).annotate(
+        highly_rated_count=Count('book', filter=Q(book__rating__gte=4))
+    ).values('name', 'highly_rated_count').distinct()
+    
+    return render(request, 'bookmodule/task5.html', {'objs': objs})
 def l9t6(request):
     return render(request, 'bookmodule/task6.html')
