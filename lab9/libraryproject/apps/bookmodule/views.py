@@ -162,4 +162,7 @@ def l9t5(request):
 
     return render(request, 'bookmodule/task5.html', {'objs': objs})
 def l9t6(request):
-    return render(request, 'bookmodule/task6.html')
+    objs = Publisher.objects.annotate(
+        quBooks=Count('book', filter=(Q(book__price__gt=50) & Q(book__quantity__gte=1) & Q(book__quantity__lt=5))),
+    ).values('name', 'quBooks').distinct()
+    return render(request, 'bookmodule/task6.html', {'objs': objs})
