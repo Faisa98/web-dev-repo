@@ -104,7 +104,7 @@ def __getBooksList():
 #     return render(request, 'bookmodule/stuCity.html',{'data':data})
 
 # lab9
-from django.db.models import Sum , F, FloatField, ExpressionWrapper, Value, Count, Subquery, OuterRef, Min
+from django.db.models import Sum , F, FloatField, ExpressionWrapper, Value, Count, Subquery, OuterRef, Min, Max, Avg
 from .models import Book, Publisher
 def l9t1(request):
 
@@ -137,9 +137,16 @@ def l9t3(request):
     oldest_books_per_publisher = Book.objects.filter(
         pubdate=Subquery(min_date_subquery)
     ).select_related('publisher')
+    
     return render(request, 'bookmodule/task3.html', {'objs': oldest_books_per_publisher})
 def l9t4(request):
-    return render(request, 'bookmodule/task4.html')
+    objs = Publisher.objects.annotate(
+        avg_price=Avg('book__price'),
+        min_price=Min('book__price'),
+        max_price=Max('book__price')
+    )
+    
+    return render(request, 'bookmodule/task4.html', {'objs': objs})
 def l9t5(request):
     return render(request, 'bookmodule/task5.html')
 def l9t6(request):
