@@ -148,12 +148,18 @@ def l9t4(request):
     
     return render(request, 'bookmodule/task4.html', {'objs': objs})
 def l9t5(request):
+    query = Book.objects.filter(
+        publisher=OuterRef('pk'),
+        rating__gte=4
+    ).values('title', 'quantity')[:1]
     objs = Publisher.objects.filter(
         book__rating__gte=4
     ).annotate(
-        highly_rated_count=Count('book', filter=Q(book__rating__gte=4))
-    ).values('name', 'highly_rated_count').distinct()
-    
+        highly_rated_count=Count('book', filter=Q(book__rating__gte=4)),
+        manyBooks=Subquery(query.values('quantity')[:1]),
+        bookTitle=Subquery(query.values('title')[:1])
+    ).values('name', 'highly_rated_count', 'manyBooks', 'bookTitle').distinct()
+
     return render(request, 'bookmodule/task5.html', {'objs': objs})
 def l9t6(request):
     return render(request, 'bookmodule/task6.html')

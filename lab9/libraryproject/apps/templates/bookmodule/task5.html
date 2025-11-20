@@ -9,6 +9,8 @@
   <thead>
     <tr>
       <th>Publisher Name</th>
+      <th>Book Title</th>
+      <th>Book Quantity</th>
       <th>Highly Rated Books Count</th>
     </tr>
   </thead>
@@ -16,6 +18,8 @@
     {% for item in objs %}
     <tr>
       <td>{{ item.name }}</td>
+      <td>{{ item.bookTitle }}</td>
+      <td>{{ item.manyBooks }}</td>
       <td>{{ item.highly_rated_count }}</td>
     </tr>
     {% empty %}
