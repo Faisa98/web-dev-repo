@@ -1,0 +1,34 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} List of Books {% endblock title %}
+{% block content %}
+  <h1>List of Books</h1>
+  <ul>
+    <a href="{% url 'books.l10p1add' %}">Add New Book</a>
+  </ul>
+  <table border="1" cellpadding="10" cellspacing="0">
+    <tr>
+      <th>Title:</th>
+      <th>Author:</th>
+      <th>Edition:</th>
+      <th>Price:</th>
+    </tr>
+  
+    {% for book in books %}
+      <tr>
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.edition }}</td>
+        <td>${{ book.price }}</td>
+        <td>
+          <form method="POST">
+            {% csrf_token %}            
+            <a href="{% url 'books.l10p1edit' book.id %}">Edit</a>
+            <button type="submit" formaction="{% url 'books.l10p1delete' book.id %}">Delete</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock content %}
+

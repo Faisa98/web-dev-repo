@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Book
 
 # def index(request):
@@ -73,16 +73,36 @@ def complex_query(request):
 
 # lab10
 def l10_part1_listB(request):
-    return render(request, 'bookmodule/l10_part1.html')
+    return render(request, 'bookmodule/l10_part1.html', {'books': Book.objects.all()})
 
 def l10_part1_addB(request):
+    if request.method == "POST":
+        title=request.POST.get('title')
+        author=request.POST.get('author')
+        edition=request.POST.get('edition')
+        price=request.POST.get('price')
+
+        object=Book(title=title, author=author, edition=edition, price=float(price))
+        object.save()
+        return redirect('books.l10p1')
     return render(request, 'bookmodule/l10_part1_add.html')
 
-def l10_part1_editB(request):
-    return render(request, 'bookmodule/l10_part1_edit.html')
+def l10_part1_editB(request, bID):
+    book = Book.objects.get(id=bID)
+    if request.method == "POST":
+        book.title = request.POST.get('title')
+        book.author = request.POST.get('author')
+        book.edition = request.POST.get('edition')
+        book.price = float(request.POST.get('price'))
+        book.save()
+        return redirect('books.l10p1')
+    return render(request, 'bookmodule/l10_part1_edit.html', {'book': book})
 
-def l10_part1_deleteB(request):
-    return render(request, 'bookmodule/l10_part1_delete.html')
+def l10_part1_deleteB(request, bID):
+    book = Book.objects.get(id=bID)
+    if request.method == "POST":
+        book.delete()
+    return redirect('books.l10p1')
 
 # part 2
 def l10_part2_listB(request):
