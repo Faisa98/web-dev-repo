@@ -1,4 +1,6 @@
 from django.shortcuts import redirect, render
+
+from apps.bookmodule import forms
 from .models import Book
 
 # def index(request):
@@ -106,13 +108,36 @@ def l10_part1_deleteB(request, bID):
 
 # part 2
 def l10_part2_listB(request):
-    return render(request, 'bookmodule/l10_part2.html')
+    return render(request, 'bookmodule/l10_part2.html', {'books': Book.objects.all()})
 
 def l10_part2_addB(request):
-    return render(request, 'bookmodule/l10_part2_add.html')
+    if request.method == "POST":
+        form = forms.AdditBookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('books.l10p2')
+    else:
+        form = forms.AdditBookForm(None)
+    return render(request, 'bookmodule/l10_part2_add.html', {'form': form})
 
-def l10_part2_editB(request):
-    return render(request, 'bookmodule/l10_part2_edit.html')
+def l10_part2_editB(request, bID):
+    book = Book.objects.get(id=bID)
+    if request.method == "POST":
+        form = forms.AdditBookForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+            return redirect('books.l10p2')
+    else:
+        form = forms.AdditBookForm(None, instance=book)
+    return render(request, 'bookmodule/l10_part2_edit.html', {'form': form})
 
-def l10_part2_deleteB(request):
-    return render(request, 'bookmodule/l10_part2_delete.html')
+def l10_part2_deleteB(request, bID):
+    book = Book.objects.get(id=bID)
+    if request.method == "POST":
+        form = forms.DeleteBookForm(request.POST)
+        if form.is_valid():
+            book.delete()
+            return redirect('books.l10p2')
+    else:
+        form = forms.DeleteBookForm(None)
+    return render(request, 'bookmodule/l10_part2_delete.html', {'form': form})
