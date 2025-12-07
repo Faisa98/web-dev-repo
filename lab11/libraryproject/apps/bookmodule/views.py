@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+
+from . import forms
 from .models import Book, Student
 
 # def index(request):
@@ -106,3 +108,35 @@ def task7(request):
 # lab 11
 def lab11(request):
     return render(request, 'bookmodule/lab11.html', {'students': Student.objects.all()})
+
+def add11(request):
+    if request.method == "POST":
+        form = forms.AdditstuForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('books.lab11')
+    else:
+        form = forms.AdditstuForm(None)
+    return render(request, 'bookmodule/add11.html', {'form': form})
+
+def edit11(request, bID):
+    student = Student.objects.get(id=bID)
+    if request.method == "POST":
+        form = forms.AdditstuForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('books.lab11')
+    else:
+        form = forms.AdditstuForm(None, instance=student)
+    return render(request, 'bookmodule/edit11.html', {'form': form})
+
+def delete11(request, bID):
+    student = Student.objects.get(id=bID)
+    if request.method == "POST":
+        form = forms.DeleteStudentForm(request.POST)
+        if form.is_valid():
+            student.delete()
+            return redirect('books.lab11')
+    else:
+        form = forms.DeleteStudentForm(None)
+    return render(request, 'bookmodule/delete11.html', {'form': form})

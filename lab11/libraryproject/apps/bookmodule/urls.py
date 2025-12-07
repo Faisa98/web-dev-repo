@@ -30,5 +30,8 @@ urlpatterns = [
     
     #lab11
     path('lab11/', views.lab11, name="books.lab11"),
+    path('lab11/add/', views.add11, name="books.add11"),
+    path('lab11/edit/<int:bID>/', views.edit11, name="books.edit11"),
+    path('lab11/delete/<int:bID>/', views.delete11, name="books.delete11"),
 
 ]

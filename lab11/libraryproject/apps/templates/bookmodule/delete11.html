@@ -1,0 +1,12 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} Delete student {% endblock title %}
+{% block content %}
+  <h1>Delete a student</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{form}}
+    <h3>Are you sure you want to delete the student?</h3>
+    <button type="submit">Delete student</button>
+  </form>
+{% endblock content %}
