@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Book
+from .models import Book, Student
 
 # def index(request):
 #     name = request.GET.get("name") or "world!"
@@ -103,3 +103,6 @@ def task7(request):
     data= Address.objects.annotate(numStu=Count('student'))
     return render(request, 'bookmodule/stuCity.html',{'data':data})
 
+# lab 11
+def lab11(request):
+    return render(request, 'bookmodule/lab11.html', {'students': Student.objects.all()})
