@@ -33,5 +33,9 @@ urlpatterns = [
     path('lab11/add/', views.add11, name="books.add11"),
     path('lab11/edit/<int:bID>/', views.edit11, name="books.edit11"),
     path('lab11/delete/<int:bID>/', views.delete11, name="books.delete11"),
+    
+    path('lab112/', views.lab112, name="books.lab112"),
+    path('lab112/add/', views.add112, name="books.add112"),
+    path('lab112/edit/<int:bID>/', views.edit112, name="books.edit112"),
 
 ]

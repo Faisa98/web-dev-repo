@@ -140,3 +140,27 @@ def delete11(request, bID):
     else:
         form = forms.DeleteStudentForm(None)
     return render(request, 'bookmodule/delete11.html', {'form': form})
+
+def lab112(request):
+    return render(request, 'bookmodule/lab112.html', {'students': Student.objects.all()})
+
+def add112(request):
+    if request.method == "POST":
+        form = forms.AdditstuForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('books.lab112')
+    else:
+        form = forms.AdditstuForm(None)
+    return render(request, 'bookmodule/add112.html', {'form': form})
+
+def edit112(request, bID):
+    student = Student.objects.get(id=bID)
+    if request.method == "POST":
+        form = forms.AdditstuForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('books.lab112')
+    else:
+        form = forms.AdditstuForm(None, instance=student)
+    return render(request, 'bookmodule/edit112.html', {'form': form})
