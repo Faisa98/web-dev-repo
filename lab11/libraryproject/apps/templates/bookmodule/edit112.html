@@ -1,0 +1,11 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} Edit student {% endblock title %}
+{% block content %}
+  <h1>Edit a student</h1>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Edit student</button>
+  </form>
+{% endblock content %}

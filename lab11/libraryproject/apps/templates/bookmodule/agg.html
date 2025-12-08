@@ -1,0 +1,13 @@
+{% extends "layouts/base.html" %} 
+{% load static %} 
+{% block title %} book list {% endblock title %} 
+{% block content %}
+    
+<p>books count: {{query.co}}</p>
+<p>price total : {{query.to}}</p>
+<p>price average: {{query.av}}</p>
+<p>max price: {{query.ma}}</p>
+<p>min price: {{query.mi}}</p>
+
+
+{% endblock content %}
