@@ -11,6 +11,8 @@
       <th>name:</th>
       <th>age:</th>
       <th>address:</th>
+      <th>favorite book:</th>
+      <th>action:</th>
     </tr>
   
     {% for student in students %}
@@ -26,6 +28,13 @@
         {% else %}
           <td>No address!!!</td>
         {% endif %}
+        <td>
+          {% if student.fav_book %}
+            <img src="{{ student.fav_book.url }}" alt="No file" width="100" height="100"/>
+          {% else %}
+            No file uploaded
+          {% endif %}
+        </td>
         <td>            
           <a href="{% url 'books.edit112' student.id %}">Edit</a>
           <a href="{% url 'books.delete11' student.id %}">Delete</a>

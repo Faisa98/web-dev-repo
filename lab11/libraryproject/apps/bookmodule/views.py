@@ -147,7 +147,7 @@ def lab112(request):
 
 def add112(request):
     if request.method == "POST":
-        form = forms.AdditstuForm2(request.POST)
+        form = forms.AdditstuForm2(request.POST, request.FILES)
         if form.is_valid():
             student = form.save()
             return redirect('books.lab112')
@@ -158,7 +158,7 @@ def add112(request):
 def edit112(request, bID):
     student = Student2.objects.get(id=bID)
     if request.method == "POST":
-        form = forms.AdditstuForm2(request.POST, instance=student)
+        form = forms.AdditstuForm2(request.POST, request.FILES, instance=student)
         if form.is_valid():
             post = form.save()
             return redirect('books.lab112')

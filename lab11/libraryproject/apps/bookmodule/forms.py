@@ -53,4 +53,4 @@ class AdditstuForm2(forms.ModelForm):
     )
     class Meta:
         model = models.Student2
-        fields = ['name', 'age', 'address']
+        fields = ['name', 'age', 'address', 'fav_book']
