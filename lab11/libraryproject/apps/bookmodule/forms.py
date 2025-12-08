@@ -1,7 +1,6 @@
 from django import forms
-from django.forms import ModelChoiceField
 from apps.bookmodule import models
-from .models import Address, Student
+from django.contrib.admin.widgets import FilteredSelectMultiple
 
 class AddressChoiceField(forms.ModelChoiceField):
             def label_from_instance(self, obj):
@@ -41,3 +40,17 @@ class AdditstuForm(forms.ModelForm):
 
 class DeleteStudentForm(forms.Form):
     confirm = forms.BooleanField(label='Confirm Deletion')
+
+class AddressChoiceField2(forms.ModelMultipleChoiceField):
+            def label_from_instance(self, obj):
+                return obj.city # pyright: ignore[reportAttributeAccessIssue]
+ 
+class AdditstuForm2(forms.ModelForm):
+    address = AddressChoiceField2(
+        queryset=models.Address2.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=True,
+    )
+    class Meta:
+        model = models.Student2
+        fields = ['name', 'age', 'address']

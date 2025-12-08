@@ -22,3 +22,4 @@ class Student2(models.Model):
     name= models.CharField(max_length=50)
     age= models.SmallIntegerField(default=0)
     address = models.ManyToManyField(Address2, verbose_name=("Address"))
+    fav_book = models.FileField(upload_to='documents/')

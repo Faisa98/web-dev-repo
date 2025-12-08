@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 
 from . import forms
-from .models import Book, Student
+from .models import Book, Student, Student2
 
 # def index(request):
 #     name = request.GET.get("name") or "world!"
@@ -142,25 +142,26 @@ def delete11(request, bID):
     return render(request, 'bookmodule/delete11.html', {'form': form})
 
 def lab112(request):
-    return render(request, 'bookmodule/lab112.html', {'students': Student.objects.all()})
+    students = Student2.objects.all()
+    return render(request, 'bookmodule/lab112.html', {'students': students})
 
 def add112(request):
     if request.method == "POST":
-        form = forms.AdditstuForm(request.POST)
+        form = forms.AdditstuForm2(request.POST)
         if form.is_valid():
-            form.save()
+            student = form.save()
             return redirect('books.lab112')
     else:
-        form = forms.AdditstuForm(None)
+        form = forms.AdditstuForm2(None)
     return render(request, 'bookmodule/add112.html', {'form': form})
 
 def edit112(request, bID):
-    student = Student.objects.get(id=bID)
+    student = Student2.objects.get(id=bID)
     if request.method == "POST":
-        form = forms.AdditstuForm(request.POST, instance=student)
+        form = forms.AdditstuForm2(request.POST, instance=student)
         if form.is_valid():
-            form.save()
+            post = form.save()
             return redirect('books.lab112')
     else:
-        form = forms.AdditstuForm(None, instance=student)
+        form = forms.AdditstuForm2(None, instance=student)
     return render(request, 'bookmodule/edit112.html', {'form': form})

@@ -4,7 +4,7 @@
 {% block content %}
   <h1>List of students</h1>
   <ul>
-    <a href="{% url 'books.add11' %}">Add New student</a>
+    <a href="{% url 'books.add112' %}">Add New student</a>
   </ul>
   <table border="1" cellpadding="10" cellspacing="0">
     <tr>
@@ -17,9 +17,17 @@
       <tr>
         <td>{{ student.name }}</td>
         <td>{{ student.age }}</td>
-        <td>{{ student.address.city }}</td>
+        {% if student.address.all %}
+          <td>
+            {% for addr in student.address.all %}
+              {{ addr.city }}<br>
+            {% endfor %}
+          </td>
+        {% else %}
+          <td>No address!!!</td>
+        {% endif %}
         <td>            
-          <a href="{% url 'books.edit11' student.id %}">Edit</a>
+          <a href="{% url 'books.edit112' student.id %}">Edit</a>
           <a href="{% url 'books.delete11' student.id %}">Delete</a>
         </td>
       </tr>
